@@ -1,15 +1,28 @@
 package com.syst.trades.model;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "client")
 public class Client {
@@ -17,10 +30,11 @@ public class Client {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(name = "last_address_requested_id")
-	private Long lastAddressRequestedId;
-	
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "last_address_requested_id")
+	private Address lastAddressRequestedId;
+
 	@Column(name = "last_product_requested_id")
 	private Long lastProductRequestedId;
 	
@@ -49,119 +63,9 @@ public class Client {
 	private String updateUser;
 	
 	@Column(name = "creation_date")
-	private Date creationDate;
+	private LocalDateTime creationDate;
 	
 	@Column(name = "update_date")
-	private Date updateDate;
+	private LocalDateTime updateDate;
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Long getLastAddressRequestedId() {
-		return lastAddressRequestedId;
-	}
-
-	public void setLastAddressRequestedId(Long lastAddressRequestedId) {
-		this.lastAddressRequestedId = lastAddressRequestedId;
-	}
-
-	public Long getLastProductRequested() {
-		return lastProductRequestedId;
-	}
-
-	public void setLastProductRequested(Long lastProductRequestedId) {
-		this.lastProductRequestedId = lastProductRequestedId;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getCpfCnpj() {
-		return cpfCnpj;
-	}
-
-	public void setCpfCnpj(String cpfCnpj) {
-		this.cpfCnpj = cpfCnpj;
-	}
-
-	public String getPhoneNumber() {
-		return phoneNumber;
-	}
-
-	public void setPhoneNumber(String phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Boolean getInDebitWithMe() {
-		return inDebitWithMe;
-	}
-
-	public void setInDebitWithMe(Boolean inDebitWithMe) {
-		this.inDebitWithMe = inDebitWithMe;
-	}
-
-	public Boolean getInDebitWithOther() {
-		return inDebitWithOther;
-	}
-
-	public void setInDebitWithOther(Boolean inDebitWithOther) {
-		this.inDebitWithOther = inDebitWithOther;
-	}
-
-	public String getCreationUser() {
-		return creationUser;
-	}
-
-	public void setCreationUser(String creationUser) {
-		this.creationUser = creationUser;
-	}
-
-	public String getUpdateUser() {
-		return updateUser;
-	}
-
-	public void setUpdateUser(String updateUser) {
-		this.updateUser = updateUser;
-	}
-
-	public String getCreationDate() {
-		String strCreationDate = "";
-		if (null != creationDate) {
-			SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");    
-			strCreationDate = fmt.format(creationDate);
-		}	
-		return strCreationDate;
-		
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
-
-	public Date getUpdateDate() {
-		return updateDate;
-	}
-
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
-	
 }

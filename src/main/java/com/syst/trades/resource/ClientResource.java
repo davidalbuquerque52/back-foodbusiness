@@ -1,13 +1,14 @@
 package com.syst.trades.resource;
 
-import java.net.URI;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.syst.trades.event.CreatedResourceEvent;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +16,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.syst.trades.model.Address;
 import com.syst.trades.model.Client;
 import com.syst.trades.repository.ClientRepository;
 
@@ -29,6 +27,9 @@ public class ClientResource {
 
 	@Autowired
 	private ClientRepository clientRepository;
+
+	@Autowired
+	private ApplicationEventPublisher publisher;
 
 	@GetMapping
 	public List<Client> toList() {
@@ -43,24 +44,13 @@ public class ClientResource {
 	}
 
 	@PostMapping
-	/*
-	 * O @Valid é para validar os campos de acordo com suas propriedades
-	 * especificados na camada model atributos @NotNull por exemplo, daí no retorno
-	 * de um post sem um atributo obrigatório, o sistema trata, não deixando o erro
-	 * chegar ao banco de dados e travando o sistema (retornando erro 500 para o
-	 * client (erro server side) e sim uma mensagem de erro (400) bad request, erro
-	 * no lado do client)
-	 */
-	public ResponseEntity<Client> toSave(@Valid @RequestBody Client client) {
+	public ResponseEntity<Client> toSave(@Valid @RequestBody Client client, HttpServletResponse response) {
 
-		Date date = new Date(System.currentTimeMillis());
-		client.setCreationDate(date);
+		client.setCreationDate(LocalDateTime.now());
 		Client clientSaved = clientRepository.save(client);
+		publisher.publishEvent(new CreatedResourceEvent(this, clientSaved.getId(), response));
 
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(clientSaved.getId())
-				.toUri();
-
-		return ResponseEntity.created(uri).body(clientSaved);
+		return ResponseEntity.status(HttpStatus.CREATED).body(clientSaved);
 	}
 
 }

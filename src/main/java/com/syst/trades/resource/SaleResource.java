@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,7 +29,7 @@ public class SaleResource {
 	@GetMapping
 	public List<Sale> toList(){
 		return saleRepository.findAll();
-	}
+	} // esse cara tem que ser refatorado por trade_id
 	
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
@@ -39,6 +40,12 @@ public class SaleResource {
 				.buildAndExpand(saleSaved.getId()).toUri();
 		
 		response.setHeader("Location", uri.toASCIIString());
+	}
+
+	@GetMapping("/status/{statusId}")
+	@ResponseStatus(HttpStatus.OK)
+	public List<Sale> getSaleByStatusId(@PathVariable("statusId") Long statusId) {
+		return saleRepository.findByStatusId(statusId);
 	}
 
 }

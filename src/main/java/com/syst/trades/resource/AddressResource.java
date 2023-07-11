@@ -37,7 +37,7 @@ public class AddressResource {
 	}
 
 	@PostMapping
-	public ResponseEntity<Address> toSave(@Valid @RequestBody Address address, HttpServletResponse response) {
+	public ResponseEntity<Address> save(@Valid @RequestBody Address address, HttpServletResponse response) {
 
 		Address addressSaved = addressRepository.save(address);
 		publisher.publishEvent(new CreatedResourceEvent(this, addressSaved.getId(), response));

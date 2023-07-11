@@ -1,6 +1,12 @@
 package com.syst.trades.model;
 
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +16,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
 @Table(name = "client_trade")
 public class ClientTrade {
@@ -24,43 +36,11 @@ public class ClientTrade {
 	@JoinColumn(name = "client_id")
 	private Client clientId;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "trade_id")
-	private Trade tradeId;
+	private Trade trade;
 	
 	@Column(name = "creation_date")
-	private Date creationDate;
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Client getClientId() {
-		return clientId;
-	}
-
-	public void setClientId(Client clientId) {
-		this.clientId = clientId;
-	}
-
-	public Trade getTradeId() {
-		return tradeId;
-	}
-
-	public void setTradeId(Trade tradeId) {
-		this.tradeId = tradeId;
-	}
-
-	public Date getCreationDate() {
-		return creationDate;
-	}
-
-	public void setCreationDate(Date creationDate) {
-		this.creationDate = creationDate;
-	}
+	private LocalDateTime creationDate;
 
 }

@@ -1,5 +1,7 @@
 package com.syst.trades.resource;
 
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -39,6 +41,7 @@ public class AddressResource {
 	@PostMapping
 	public ResponseEntity<Address> save(@Valid @RequestBody Address address, HttpServletResponse response) {
 
+		address.setCreationDate(new Date());
 		Address addressSaved = addressRepository.save(address);
 		publisher.publishEvent(new CreatedResourceEvent(this, addressSaved.getId(), response));
 		return ResponseEntity.status(HttpStatus.CREATED).body(addressSaved);

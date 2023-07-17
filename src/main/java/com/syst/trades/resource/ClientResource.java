@@ -1,6 +1,6 @@
 package com.syst.trades.resource;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
@@ -46,7 +46,7 @@ public class ClientResource {
 	@PostMapping
 	public ResponseEntity<Client> toSave(@Valid @RequestBody Client client, HttpServletResponse response) {
 
-		client.setCreationDate(LocalDateTime.now());
+		client.setCreationDate(new Date());
 		Client clientSaved = clientRepository.save(client);
 		publisher.publishEvent(new CreatedResourceEvent(this, clientSaved.getId(), response));
 

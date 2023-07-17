@@ -1,33 +1,26 @@
-package com.syst.trades.model;
+package com.syst.trades.dto.get;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.syst.trades.helper.DateDeserializer;
+import com.syst.trades.helper.DateSerializer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Entity
-@Table(name = "address")
-public class Address {
+public class AddressResponse {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@NotNull
@@ -44,22 +37,20 @@ public class Address {
 
 	private String complement;
 
-	@Column(name = "reference_point")
 	private String referencePoint;
 
-	@Column(name = "cep")
 	private String cep;
 
-	@Column(name = "creation_user")
 	private String creationUser;
 
-	@Column(name = "update_user")
 	private String updateUser;
 
-	@Column(name = "creation_date", updatable=false)
+	@JsonDeserialize(using = DateDeserializer.class)
+	@JsonSerialize(using = DateSerializer.class)
 	private Date creationDate;
 
-	@Column(name = "update_date")
+	@JsonDeserialize(using = DateDeserializer.class)
+	@JsonSerialize(using = DateSerializer.class)
 	private Date updateDate;
 
 }

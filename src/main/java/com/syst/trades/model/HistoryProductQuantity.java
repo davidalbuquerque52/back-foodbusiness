@@ -1,6 +1,6 @@
 package com.syst.trades.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -36,7 +36,7 @@ public class HistoryProductQuantity {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id")
-	private Product productId;
+	private Product product;
 	
 	@Column(name = "quantity")
 	private Integer quantity;
@@ -56,9 +56,9 @@ public class HistoryProductQuantity {
 	private String updateUser;
 	
 	@Column(name = "creation_date")
-	private LocalDateTime creationDate;
+	private Date creationDate;
 	
 	@Column(name = "update_date")
-	private LocalDateTime updateDate;
+	private Date updateDate;
 
 }

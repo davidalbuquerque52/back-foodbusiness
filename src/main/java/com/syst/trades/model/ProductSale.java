@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,8 +32,9 @@ public class ProductSale {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	@Column(name = "client_id")
-	private Integer clientId;
+	@ManyToOne
+	@JoinColumn(name = "client_id")
+	private Client client;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "sale_id")
@@ -63,9 +64,9 @@ public class ProductSale {
 	private String updateUser;
 
 	@Column(name = "creation_date")
-	private LocalDateTime creationDate;
+	private Date creationDate;
 
 	@Column(name = "update_date")
-	private LocalDateTime updateDate;
+	private Date updateDate;
 
 }

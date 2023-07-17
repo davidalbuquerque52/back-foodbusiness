@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,6 +41,6 @@ public class ClientTrade {
 	private Trade trade;
 	
 	@Column(name = "creation_date")
-	private LocalDateTime creationDate;
+	private Date creationDate;
 
 }

@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -63,9 +63,9 @@ public class Client {
 	private String updateUser;
 	
 	@Column(name = "creation_date")
-	private LocalDateTime creationDate;
+	private Date creationDate;
 	
 	@Column(name = "update_date")
-	private LocalDateTime updateDate;
+	private Date updateDate;
 
 }

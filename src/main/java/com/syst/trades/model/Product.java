@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -72,10 +72,10 @@ public class Product {
 	private String updateUser;
 
 	@Column(name = "creation_date", updatable=false)
-	private LocalDateTime creationDate;
+	private Date creationDate;
 
 	@Column(name = "update_date")
-	private LocalDateTime updateDate;
+	private Date updateDate;
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
     private List<ProductSale> productSales;

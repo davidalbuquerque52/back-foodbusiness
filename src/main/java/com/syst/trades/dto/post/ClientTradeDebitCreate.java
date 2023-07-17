@@ -19,7 +19,7 @@ public class ClientTradeDebitCreate {
 	
 	private TradeCreate trade;
 	
-	private Integer clientId;
+	private ClientCreate client;
 
 	@Enumerated(EnumType.STRING)
 	private DebtEnum type;

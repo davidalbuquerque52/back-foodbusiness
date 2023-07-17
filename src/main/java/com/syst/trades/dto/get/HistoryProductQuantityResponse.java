@@ -24,7 +24,7 @@ public class HistoryProductQuantityResponse {
 
 	private Long id;
 	
-	private ProductResponse productId;
+	private ProductResponse product;
 	
 	private Integer quantity;
 	

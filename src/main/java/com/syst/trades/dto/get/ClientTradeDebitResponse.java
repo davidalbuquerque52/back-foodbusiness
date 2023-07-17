@@ -26,7 +26,7 @@ public class ClientTradeDebitResponse {
 
 	private TradeResponse trade;
 	
-	private Integer clientId;
+	private ClientResponse client;
 
 	@Enumerated(EnumType.STRING)
 	private DebtEnum type;

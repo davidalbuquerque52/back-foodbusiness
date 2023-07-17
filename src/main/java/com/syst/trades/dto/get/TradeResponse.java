@@ -26,9 +26,9 @@ public class TradeResponse {
 
 	private AddressResponse address;
 
-	private Integer ownerId;
+	private ClientResponse ownerId;
 
-	private Integer paymentModeId;
+	private PaymentModeResponse paymentMode;
 
 	private String name;
 

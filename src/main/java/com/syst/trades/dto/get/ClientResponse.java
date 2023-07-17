@@ -23,7 +23,7 @@ public class ClientResponse {
 
 	private AddressResponse lastAddressRequestedId;
 
-	private Long lastProductRequestedId;
+	private ProductResponse lastProductRequestedId;
 	
 	private String name;
 	

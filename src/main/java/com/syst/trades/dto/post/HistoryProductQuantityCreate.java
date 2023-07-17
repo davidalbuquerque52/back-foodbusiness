@@ -17,7 +17,7 @@ import javax.persistence.Enumerated;
 @Builder
 public class HistoryProductQuantityCreate {
 
-	private ProductCreate productId;
+	private ProductCreate product;
 	
 	private Integer quantity;
 	

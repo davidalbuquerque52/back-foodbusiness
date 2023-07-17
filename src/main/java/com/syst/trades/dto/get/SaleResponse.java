@@ -23,7 +23,7 @@ public class SaleResponse {
 
 	private TradeResponse trade;
 	
-	private Long destinationId;
+	private AddressResponse destination;
 	
 	private Double amountPaid;
 	

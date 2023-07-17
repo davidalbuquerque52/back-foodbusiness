@@ -21,7 +21,7 @@ public class ClientTradeResponse {
 	
 	private Long id;
 	
-	private ClientResponse clientId;
+	private ClientResponse client;
 	
 	private TradeResponse trade;
 

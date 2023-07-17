@@ -34,7 +34,7 @@ public class ClientTrade {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "client_id")
-	private Client clientId;
+	private Client client;
 	
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "trade_id")

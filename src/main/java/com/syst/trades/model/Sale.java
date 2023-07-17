@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Getter
@@ -34,9 +35,10 @@ public class Sale {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "trade_id")
 	private Trade trade;
-	
-	@Column(name = "destination_id") // Aqui poderá ser do tipo Address?
-	private Long destinationId;
+
+	@OneToOne
+	@JoinColumn(name = "destination_id")
+	private Address destinationId;
 	
 	@Column(name = "amount_paid")
 	private Double amountPaid;
@@ -57,9 +59,9 @@ public class Sale {
 	private String updateUser;
 	
 	@Column(name = "creation_date")
-	private LocalDateTime creationDate;
+	private Date creationDate;
 	
 	@Column(name = "update_date")
-	private LocalDateTime updateDate;
+	private Date updateDate;
 	
 }

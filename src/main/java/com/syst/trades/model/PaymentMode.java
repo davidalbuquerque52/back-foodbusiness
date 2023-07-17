@@ -13,7 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import java.time.LocalDateTime;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -38,9 +38,9 @@ public class PaymentMode {
 	private String updateUser;
 	
 	@Column(name = "creation_date")
-	private LocalDateTime creationDate;
+	private Date creationDate;
 	
 	@Column(name = "update_date")
-	private LocalDateTime updateDate;
+	private Date updateDate;
 
 }

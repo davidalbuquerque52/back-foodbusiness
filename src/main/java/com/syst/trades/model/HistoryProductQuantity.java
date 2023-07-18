@@ -33,31 +33,31 @@ public class HistoryProductQuantity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "product_id")
 	private Product product;
-	
+
 	@Column(name = "quantity")
 	private Integer quantity;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "trade_id")
 	private Trade trade;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type")
 	private HisProductEnum type;
-	
+
 	@Column(name = "creation_user")
 	private String creationUser;
-	
+
 	@Column(name = "update_user")
 	private String updateUser;
-	
+
 	@Column(name = "creation_date")
 	private Date creationDate;
-	
+
 	@Column(name = "update_date")
 	private Date updateDate;
 

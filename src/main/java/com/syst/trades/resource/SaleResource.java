@@ -22,23 +22,23 @@ import com.syst.trades.repository.SaleRepository;
 @RestController
 @RequestMapping("/sale")
 public class SaleResource {
-	
+
 	@Autowired
 	private SaleRepository saleRepository;
-	
+
 	@GetMapping
 	public List<Sale> toList(){
 		return saleRepository.findAll();
 	} // esse cara tem que ser refatorado por trade_id
-	
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public void toSave(@RequestBody Sale sale, HttpServletResponse response) {
 		Sale saleSaved = saleRepository.save(sale);
-		
+
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
 				.buildAndExpand(saleSaved.getId()).toUri();
-		
+
 		response.setHeader("Location", uri.toASCIIString());
 	}
 

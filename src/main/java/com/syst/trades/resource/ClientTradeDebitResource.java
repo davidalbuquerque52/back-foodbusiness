@@ -21,8 +21,8 @@ import com.syst.trades.repository.ClientTradeDebitRepository;
 @RestController
 @RequestMapping("/client-trade-debit")
 public class ClientTradeDebitResource {
-	
-	
+
+
 	@Autowired
 	private ClientTradeDebitRepository clientTradeDebitRepository;
 
@@ -30,15 +30,15 @@ public class ClientTradeDebitResource {
 	public List<ClientTradeDebit> toList() {
 		return clientTradeDebitRepository.findAll();
 	}
-	
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public void toSave(@RequestBody ClientTradeDebit clientTradeDebit, HttpServletResponse response) {
 		ClientTradeDebit clientTradeDebitSaved = clientTradeDebitRepository.save(clientTradeDebit);
-		
+
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 				.buildAndExpand(clientTradeDebitSaved.getId()).toUri();
-		
+
 		response.setHeader("Location", uri.toASCIIString());
 	}
 }

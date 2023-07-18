@@ -18,17 +18,17 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class StatusResponse {
-	
+
 	private Integer id;
 
 	private TradeResponse trade;
-	
+
 	private String description;
-	
+
 	private Boolean active;
-	
+
 	private String creationUser;
-	
+
 	private String updateUser;
 
 	@JsonDeserialize(using = DateDeserializer.class)

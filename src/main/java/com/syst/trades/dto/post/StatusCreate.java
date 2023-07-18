@@ -12,11 +12,11 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class StatusCreate {
-	
+
 	private TradeCreate trade;
-	
+
 	private String description;
-	
+
 	private Boolean active;
-	
+
 }

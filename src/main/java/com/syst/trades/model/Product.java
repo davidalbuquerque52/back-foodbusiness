@@ -61,7 +61,7 @@ public class Product {
 
 	@Column(name = "active")
 	private Boolean active;
-	
+
 	@Column(name = "product_image")
 	private String productImage;
 
@@ -76,8 +76,8 @@ public class Product {
 
 	@Column(name = "update_date")
 	private Date updateDate;
-	
+
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
-    private List<ProductSale> productSales;
+	private List<ProductSale> productSales;
 
 }

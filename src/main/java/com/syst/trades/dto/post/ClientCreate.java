@@ -14,15 +14,15 @@ import lombok.Setter;
 public class ClientCreate {
 
 	private String name;
-	
+
 	private String cpfCnpj;
-	
+
 	private String phoneNumber;
 
 	private String email;
-	
+
 	private Boolean inDebitWithMe;
-	
+
 	private Boolean inDebitWithOther;
-	
+
 }

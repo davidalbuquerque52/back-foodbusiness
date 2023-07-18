@@ -52,7 +52,7 @@ public class AddressResource {
 		return address != null ? ResponseEntity.ok(address) : ResponseEntity.notFound().build();
 
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public void remove(@PathVariable Long id) {
 		addressRepository.delete(id);

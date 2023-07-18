@@ -16,16 +16,16 @@ import javax.persistence.Enumerated;
 @AllArgsConstructor
 @Builder
 public class ClientTradeDebitCreate {
-	
+
 	private TradeCreate trade;
-	
+
 	private ClientCreate client;
 
 	@Enumerated(EnumType.STRING)
 	private DebtEnum type;
-	
+
 	private Double value;
-	
+
 	private Double totalDebt;
-	
+
 }

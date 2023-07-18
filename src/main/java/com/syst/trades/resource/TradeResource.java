@@ -24,21 +24,21 @@ public class TradeResource {
 
 	@Autowired
 	private TradeRepository tradeRepository;
-	
+
 	@GetMapping
 	public List<Trade> toList() {
 		return tradeRepository.findAll();
 	}
-	
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public void toSave(@RequestBody Trade trade, HttpServletResponse response) {
 		Trade tradeSaved = tradeRepository.save(trade);
-		
+
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
 				.buildAndExpand(tradeSaved.getId()).toUri();
-		
+
 		response.setHeader("Location", uri.toASCIIString());
 	}
-	
+
 }

@@ -18,23 +18,23 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class SaleResponse {
-	
+
 	private Long id;
 
 	private TradeResponse trade;
-	
+
 	private AddressResponse destination;
-	
+
 	private Double amountPaid;
-	
+
 	private Double change;
 
 	private Long statusId;
-	
+
 	private Boolean paid;
-	
+
 	private String creationUser;
-	
+
 	private String updateUser;
 
 	@JsonDeserialize(using = DateDeserializer.class)
@@ -44,5 +44,5 @@ public class SaleResponse {
 	@JsonDeserialize(using = DateDeserializer.class)
 	@JsonSerialize(using = DateSerializer.class)
 	private Date updateDate;
-	
+
 }

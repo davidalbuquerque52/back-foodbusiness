@@ -18,11 +18,11 @@ import javax.persistence.Enumerated;
 public class HistoryProductQuantityCreate {
 
 	private ProductCreate product;
-	
+
 	private Integer quantity;
-	
+
 	private TradeCreate trade;
-	
+
 	@Enumerated(EnumType.STRING)
 	private HisProductEnum type;
 

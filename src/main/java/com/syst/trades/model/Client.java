@@ -39,34 +39,34 @@ public class Client {
 	@OneToOne
 	@JoinColumn(name = "last_product_requested_id")
 	private Product lastProductRequestedId;
-	
+
 	@Column(name = "name")
 	private String name;
-	
+
 	@Column(name = "cpf_cnpj")
 	private String cpfCnpj;
-	
+
 	@Column(name = "phone_number")
 	private String phoneNumber;
-	
+
 	@Column(name = "email")
 	private String email;
-	
+
 	@Column(name = "in_debit_with_me")
 	private Boolean inDebitWithMe;
-	
+
 	@Column(name = "in_debit_with_other")
 	private Boolean inDebitWithOther;
-	
+
 	@Column(name = "creation_User")
 	private String creationUser;
-	
+
 	@Column(name = "update_user")
 	private String updateUser;
-	
+
 	@Column(name = "creation_date")
 	private Date creationDate;
-	
+
 	@Column(name = "update_date")
 	private Date updateDate;
 

@@ -23,23 +23,23 @@ import java.util.Date;
 @Entity
 @Table(name = "payment_mode")
 public class PaymentMode {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	
+
 	@Column(name = "description")
 	private String description;
-	
+
 	@Column(name = "creation_user")
 	private String creationUser;
-	
+
 	@Column(name = "update_user")
 	private String updateUser;
-	
+
 	@Column(name = "creation_date")
 	private Date creationDate;
-	
+
 	@Column(name = "update_date")
 	private Date updateDate;
 

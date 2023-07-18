@@ -21,22 +21,22 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class ClientTradeDebitResponse {
-	
+
 	private Integer id;
 
 	private TradeResponse trade;
-	
+
 	private ClientResponse client;
 
 	@Enumerated(EnumType.STRING)
 	private DebtEnum type;
-	
+
 	private Double value;
-	
+
 	private Double totalDebt;
-	
+
 	private String creationUser;
-	
+
 	private String updateUser;
 
 	@JsonDeserialize(using = DateDeserializer.class)

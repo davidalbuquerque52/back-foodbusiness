@@ -12,17 +12,17 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class SaleCreate {
-	
+
 	private TradeCreate trade;
-	
+
 	private AddressCreate destination;
-	
+
 	private Double amountPaid;
-	
+
 	private Double change;
 
 	private StatusCreate status;
-	
+
 	private Boolean paid;
-	
+
 }

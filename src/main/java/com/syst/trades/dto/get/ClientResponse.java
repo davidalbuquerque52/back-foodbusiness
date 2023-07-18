@@ -24,21 +24,21 @@ public class ClientResponse {
 	private AddressResponse lastAddressRequestedId;
 
 	private ProductResponse lastProductRequestedId;
-	
+
 	private String name;
-	
+
 	private String cpfCnpj;
-	
+
 	private String phoneNumber;
 
 	private String email;
-	
+
 	private Boolean inDebitWithMe;
-	
+
 	private Boolean inDebitWithOther;
-	
+
 	private String creationUser;
-	
+
 	private String updateUser;
 
 	@JsonDeserialize(using = DateDeserializer.class)

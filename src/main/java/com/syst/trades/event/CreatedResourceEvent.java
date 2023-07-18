@@ -19,7 +19,7 @@ public class CreatedResourceEvent extends ApplicationEvent {
 	public Long getCodigo() {
 		return codigo;
 	}
-	
+
 	public HttpServletResponse getResponse() {
 		return response;
 	}

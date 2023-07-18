@@ -27,19 +27,19 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "client_trade")
 public class ClientTrade {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "client_id")
 	private Client client;
-	
+
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "trade_id")
 	private Trade trade;
-	
+
 	@Column(name = "creation_date")
 	private Date creationDate;
 

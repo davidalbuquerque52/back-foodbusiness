@@ -23,18 +23,18 @@ import java.util.Date;
 public class HistoryProductQuantityResponse {
 
 	private Long id;
-	
+
 	private ProductResponse product;
-	
+
 	private Integer quantity;
-	
+
 	private TradeResponse trade;
-	
+
 	@Enumerated(EnumType.STRING)
 	private HisProductEnum type;
-	
+
 	private String creationUser;
-	
+
 	private String updateUser;
 
 	@JsonDeserialize(using = DateDeserializer.class)

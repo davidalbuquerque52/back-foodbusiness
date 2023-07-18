@@ -1,6 +1,6 @@
 package com.syst.trades.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +11,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -38,11 +39,13 @@ public class Trade {
 	@JoinColumn(name = "address_id")
 	private Address address;
 
-	@Column(name = "owner_id")
-	private Integer ownerId;
+	@ManyToOne
+	@JoinColumn(name = "owner_id")
+	private Client owner;
 
-	@Column(name = "payment_mode_id")
-	private Integer paymentModeId;
+	@OneToOne
+	@JoinColumn(name = "payment_mode_id")
+	private PaymentMode paymentMode;
 
 	@Column(name = "name")
 	private String name;
@@ -67,7 +70,7 @@ public class Trade {
 	private String phoneNumber;
 
 	@Column(name = "activation_date")
-	private LocalDateTime activationDate;
+	private Date activationDate;
 
 	@Column(name = "creation_user")
 	private String creationUser;
@@ -76,9 +79,9 @@ public class Trade {
 	private String updateUser;
 
 	@Column(name = "creation_date")
-	private LocalDateTime creationDate;
+	private Date creationDate;
 
 	@Column(name = "update_date")
-	private LocalDateTime updateDate;
+	private Date updateDate;
 
 }

@@ -1,6 +1,6 @@
 package com.syst.trades.model;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -37,9 +37,10 @@ public class ClientTradeDebit {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "trade_id")
 	private Trade trade;
-	
-	@Column(name = "client_id")
-	private Integer clientId;
+
+	@ManyToOne
+	@JoinColumn(name = "client_id")
+	private Client client;
 	
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type")
@@ -58,9 +59,9 @@ public class ClientTradeDebit {
 	private String updateUser;
 	
 	@Column(name = "creation_date")
-	private LocalDateTime creationDate;
+	private Date creationDate;
 	
 	@Column(name = "update_date")
-	private LocalDateTime updateDate;
+	private Date updateDate;
 
 }

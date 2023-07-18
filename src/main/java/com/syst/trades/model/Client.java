@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +16,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Getter
@@ -35,8 +36,9 @@ public class Client {
 	@JoinColumn(name = "last_address_requested_id")
 	private Address lastAddressRequestedId;
 
-	@Column(name = "last_product_requested_id")
-	private Long lastProductRequestedId;
+	@OneToOne
+	@JoinColumn(name = "last_product_requested_id")
+	private Product lastProductRequestedId;
 	
 	@Column(name = "name")
 	private String name;
@@ -63,9 +65,9 @@ public class Client {
 	private String updateUser;
 	
 	@Column(name = "creation_date")
-	private LocalDateTime creationDate;
+	private Date creationDate;
 	
 	@Column(name = "update_date")
-	private LocalDateTime updateDate;
+	private Date updateDate;
 
 }

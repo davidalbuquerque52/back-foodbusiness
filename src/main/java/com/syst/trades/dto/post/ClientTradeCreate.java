@@ -13,9 +13,9 @@ import lombok.Setter;
 @AllArgsConstructor
 @Builder
 public class ClientTradeCreate {
-	
+
 	private ClientCreate client;
-	
+
 	private TradeResponse trade;
-	
+
 }

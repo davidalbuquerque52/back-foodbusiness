@@ -29,7 +29,7 @@ public class TradeEntityExeptionHandler extends ResponseEntityExceptionHandler {
 
 	@Override
 	protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
+																  HttpHeaders headers, HttpStatus status, WebRequest request) {
 		String userMessage = messageSource.getMessage("invalid.message", null, LocaleContextHolder.getLocale());
 		String devMessage = ex.getCause().getMessage();
 		List<Error> errors = Arrays.asList(new Error(userMessage, devMessage));
@@ -39,7 +39,7 @@ public class TradeEntityExeptionHandler extends ResponseEntityExceptionHandler {
 
 	@Override
 	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
+																  HttpHeaders headers, HttpStatus status, WebRequest request) {
 		List<Error> errors = errorsList(ex.getBindingResult());
 
 		return handleExceptionInternal(ex, errors, headers, status, request);
@@ -48,7 +48,7 @@ public class TradeEntityExeptionHandler extends ResponseEntityExceptionHandler {
 	@ExceptionHandler({ EmptyResultDataAccessException.class })
 	@ResponseStatus(HttpStatus.NOT_FOUND)
 	public ResponseEntity<Object> HandleEmptyResultDataAccessException(EmptyResultDataAccessException ex,
-			WebRequest request) {
+																	   WebRequest request) {
 		String userMessage = messageSource.getMessage("not-found.message", null, LocaleContextHolder.getLocale());
 		String devMessage = ex.getMessage();
 		List<Error> errors = Arrays.asList(new Error(userMessage, devMessage));

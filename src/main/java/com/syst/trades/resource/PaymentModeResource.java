@@ -24,21 +24,21 @@ public class PaymentModeResource {
 
 	@Autowired
 	private PaymentModeRepository paymentModeRepository;
-	
+
 	@GetMapping
 	public List<PaymentMode> toList() {
 		return paymentModeRepository.findAll();
 	}
-	
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public void toSave(@RequestBody PaymentMode paymentMode, HttpServletResponse response) {
 		PaymentMode paymentModeSaved = paymentModeRepository.save(paymentMode);
-		
+
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
 				.buildAndExpand(paymentModeSaved.getId()).toUri();
-		
+
 		response.setHeader("Location", uri.toASCIIString());
 	}
-	
+
 }

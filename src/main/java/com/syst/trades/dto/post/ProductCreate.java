@@ -32,9 +32,9 @@ public class ProductCreate {
 	private Double lastPrice;
 
 	private Boolean active;
-	
+
 	private String productImage;
-	
-    private List<ProductSaleCreate> productSales;
+
+	private List<ProductSaleCreate> productSales;
 
 }

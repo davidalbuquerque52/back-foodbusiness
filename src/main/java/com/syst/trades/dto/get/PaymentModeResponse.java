@@ -18,13 +18,13 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class PaymentModeResponse {
-	
+
 	private Integer id;
-	
+
 	private String description;
-	
+
 	private String creationUser;
-	
+
 	private String updateUser;
 
 	@JsonDeserialize(using = DateDeserializer.class)

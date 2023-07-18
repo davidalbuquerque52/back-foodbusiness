@@ -23,31 +23,31 @@ import com.syst.trades.repository.ProductRepository;
 @RestController
 @RequestMapping("/product")
 public class ProductResource {
-	
+
 	@Autowired
 	private ProductRepository productRepository;
-	
+
 	@Autowired
 	private ApplicationEventPublisher publisher;
-	
+
 	@GetMapping
 	public List<Product> toList() {
 		return productRepository.findAll();
 	}
-	
+
 	@PostMapping
 	public ResponseEntity<Product> toSave(@Valid @RequestBody Product product, HttpServletResponse response) {
-		
+
 		Product productSaved = productRepository.save(product);
 		publisher.publishEvent(new CreatedResourceEvent(this, productSaved.getId(), response));
 		return ResponseEntity.status(HttpStatus.CREATED).body(productSaved);
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Product> productById(@PathVariable Long id) {
 		Product product = productRepository.findOne(id);
 		return product != null ? ResponseEntity.ok(product) : ResponseEntity.notFound().build();
 
 	}
-	
+
 }

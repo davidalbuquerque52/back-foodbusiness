@@ -39,7 +39,7 @@ public class ProductResponse {
 	private Double lastPrice;
 
 	private Boolean active;
-	
+
 	private String productImage;
 
 	private String creationUser;
@@ -53,7 +53,7 @@ public class ProductResponse {
 	@JsonDeserialize(using = DateDeserializer.class)
 	@JsonSerialize(using = DateSerializer.class)
 	private Date updateDate;
-	
-    private List<ProductSaleResponse> productSales;
+
+	private List<ProductSaleResponse> productSales;
 
 }

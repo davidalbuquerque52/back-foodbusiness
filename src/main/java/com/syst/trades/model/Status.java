@@ -25,7 +25,7 @@ import java.util.Date;
 @Entity
 @Table(name = "status")
 public class Status {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -33,22 +33,22 @@ public class Status {
 	@ManyToOne
 	@JoinColumn(name = "trade_id")
 	private Trade trade;
-	
+
 	@Column(name = "description")
 	private String description;
-	
+
 	@Column(name = "active")
 	private Boolean active;
-	
+
 	@Column(name = "creation_user")
 	private String creationUser;
-	
+
 	@Column(name = "update_user")
 	private String updateUser;
-	
+
 	@Column(name = "creation_date")
 	private Date creationDate;
-	
+
 	@Column(name = "update_date")
 	private Date updateDate;
 

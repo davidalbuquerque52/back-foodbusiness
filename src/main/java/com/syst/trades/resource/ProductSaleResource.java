@@ -24,21 +24,21 @@ public class ProductSaleResource {
 
 	@Autowired
 	private ProductSaleRepository productSaleRepository;
-	
+
 	@GetMapping
 	public List<ProductSale> toList() {
 		return productSaleRepository.findAll();
 	}
-	
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public void toSave(@RequestBody ProductSale productSale, HttpServletResponse response) {
 		ProductSale productSaleSaved = productSaleRepository.save(productSale);
-		
+
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
 				.buildAndExpand(productSaleSaved.getId()).toUri();
-		
+
 		response.setHeader("Location", uri.toASCIIString());
 	}
-	
+
 }

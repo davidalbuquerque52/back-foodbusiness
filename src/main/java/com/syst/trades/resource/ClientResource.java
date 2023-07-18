@@ -35,7 +35,7 @@ public class ClientResource {
 	public List<Client> toList() {
 		return clientRepository.findAll();
 	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<Client> clientById(@PathVariable Long id) {
 		Client client = clientRepository.findOne(id);

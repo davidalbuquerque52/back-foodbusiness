@@ -29,7 +29,7 @@ import lombok.Setter;
 @Entity
 @Table(name = "client_trade_debit")
 public class ClientTradeDebit {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -41,26 +41,26 @@ public class ClientTradeDebit {
 	@ManyToOne
 	@JoinColumn(name = "client_id")
 	private Client client;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "type")
 	private DebtEnum type;
-	
+
 	@Column(name = "value")
 	private Double value;
-	
+
 	@Column(name = "total_debt")
 	private Double totalDebt;
-	
+
 	@Column(name = "creation_user")
 	private String creationUser;
-	
+
 	@Column(name = "update_user")
 	private String updateUser;
-	
+
 	@Column(name = "creation_date")
 	private Date creationDate;
-	
+
 	@Column(name = "update_date")
 	private Date updateDate;
 

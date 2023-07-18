@@ -23,22 +23,22 @@ public class HistoryProductQuantityResource {
 
 	@Autowired
 	private HistoryProductQuantityRepository historyProductQuantityRepository;
-	
+
 	@GetMapping
 	public List<HistoryProductQuantity> toList() {
 		return historyProductQuantityRepository.findAll();
 	}
-	
+
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
 	public void toSave(HistoryProductQuantity historyProductQuantity, HttpServletResponse response) {
-		HistoryProductQuantity historyProductQuantitySaved = 
+		HistoryProductQuantity historyProductQuantitySaved =
 				historyProductQuantityRepository.save(historyProductQuantity);
-		
+
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
 				.buildAndExpand(historyProductQuantitySaved.getId()).toUri();
-		
+
 		response.setHeader("Location", uri.toASCIIString());
 	}
-	
+
 }

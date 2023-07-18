@@ -18,11 +18,11 @@ import java.util.Date;
 @AllArgsConstructor
 @Builder
 public class ClientTradeResponse {
-	
+
 	private Long id;
-	
+
 	private ClientResponse client;
-	
+
 	private TradeResponse trade;
 
 	@JsonDeserialize(using = DateDeserializer.class)

@@ -21,10 +21,10 @@ import com.syst.trades.repository.StatusRepository;
 @RestController
 @RequestMapping("/status")
 public class StatusResource {
-	
+
 	@Autowired
 	private StatusRepository statusRepository;
-	
+
 	@GetMapping
 	public List<Status> toList() {
 		return statusRepository.findAll();
@@ -34,11 +34,11 @@ public class StatusResource {
 	@ResponseStatus(HttpStatus.CREATED)
 	public void toSave(@RequestBody Status status, HttpServletResponse response) {
 		Status statusSaved = statusRepository.save(status);
-		
+
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
 				.buildAndExpand(statusSaved.getId()).toUri();
-		
+
 		response.setHeader("Location", uri.toASCIIString());
 	}
-	
+
 }

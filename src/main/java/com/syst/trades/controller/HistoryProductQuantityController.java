@@ -9,34 +9,34 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.syst.trades.model.Trade;
-import com.syst.trades.repository.TradeRepository;
+import com.syst.trades.model.HistoryProductQuantity;
+import com.syst.trades.repository.HistoryProductQuantityRepository;
 
 @RestController
-@RequestMapping("/trade")
-public class TradeResource {
+@RequestMapping("/history-product-quantity")
+public class HistoryProductQuantityController {
 
 	@Autowired
-	private TradeRepository tradeRepository;
+	private HistoryProductQuantityRepository historyProductQuantityRepository;
 
 	@GetMapping
-	public List<Trade> toList() {
-		return tradeRepository.findAll();
+	public List<HistoryProductQuantity> toList() {
+		return historyProductQuantityRepository.findAll();
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public void toSave(@RequestBody Trade trade, HttpServletResponse response) {
-		Trade tradeSaved = tradeRepository.save(trade);
+	public void toSave(HistoryProductQuantity historyProductQuantity, HttpServletResponse response) {
+		HistoryProductQuantity historyProductQuantitySaved =
+				historyProductQuantityRepository.save(historyProductQuantity);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
-				.buildAndExpand(tradeSaved.getId()).toUri();
+				.buildAndExpand(historyProductQuantitySaved.getId()).toUri();
 
 		response.setHeader("Location", uri.toASCIIString());
 	}

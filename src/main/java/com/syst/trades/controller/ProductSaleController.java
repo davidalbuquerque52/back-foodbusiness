@@ -15,28 +15,28 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.syst.trades.model.Status;
-import com.syst.trades.repository.StatusRepository;
+import com.syst.trades.model.ProductSale;
+import com.syst.trades.repository.ProductSaleRepository;
 
 @RestController
-@RequestMapping("/status")
-public class StatusResource {
+@RequestMapping("/product-sale")
+public class ProductSaleController {
 
 	@Autowired
-	private StatusRepository statusRepository;
+	private ProductSaleRepository productSaleRepository;
 
 	@GetMapping
-	public List<Status> toList() {
-		return statusRepository.findAll();
+	public List<ProductSale> toList() {
+		return productSaleRepository.findAll();
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public void toSave(@RequestBody Status status, HttpServletResponse response) {
-		Status statusSaved = statusRepository.save(status);
+	public void toSave(@RequestBody ProductSale productSale, HttpServletResponse response) {
+		ProductSale productSaleSaved = productSaleRepository.save(productSale);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
-				.buildAndExpand(statusSaved.getId()).toUri();
+				.buildAndExpand(productSaleSaved.getId()).toUri();
 
 		response.setHeader("Location", uri.toASCIIString());
 	}

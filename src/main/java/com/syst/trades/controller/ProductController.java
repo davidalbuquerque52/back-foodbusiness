@@ -22,7 +22,7 @@ import com.syst.trades.repository.ProductRepository;
 
 @RestController
 @RequestMapping("/product")
-public class ProductResource {
+public class ProductController {
 
 	@Autowired
 	private ProductRepository productRepository;

@@ -24,7 +24,7 @@ import com.syst.trades.repository.AddressRepository;
 
 @RestController
 @RequestMapping("/address")
-public class AddressResource {
+public class AddressController {
 
 	@Autowired
 	private AddressRepository addressRepository;

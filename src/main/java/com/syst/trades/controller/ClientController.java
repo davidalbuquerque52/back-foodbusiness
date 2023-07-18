@@ -23,7 +23,7 @@ import com.syst.trades.repository.ClientRepository;
 
 @RestController
 @RequestMapping("/client")
-public class ClientResource {
+public class ClientController {
 
 	@Autowired
 	private ClientRepository clientRepository;

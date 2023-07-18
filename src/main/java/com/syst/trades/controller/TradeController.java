@@ -15,28 +15,28 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.syst.trades.model.ClientTradeDebit;
-import com.syst.trades.repository.ClientTradeDebitRepository;
+import com.syst.trades.model.Trade;
+import com.syst.trades.repository.TradeRepository;
 
 @RestController
-@RequestMapping("/client-trade")
-public class ClientTradeResource {
+@RequestMapping("/trade")
+public class TradeController {
 
 	@Autowired
-	private ClientTradeDebitRepository clientTradeDebitRepository;
+	private TradeRepository tradeRepository;
 
 	@GetMapping
-	public List<ClientTradeDebit> toList() {
-		return clientTradeDebitRepository.findAll();
+	public List<Trade> toList() {
+		return tradeRepository.findAll();
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public void toSave(@RequestBody ClientTradeDebit clientTradeDebit, HttpServletResponse response) {
-		ClientTradeDebit clientTradeDebitSaved = clientTradeDebitRepository.save(clientTradeDebit);
+	public void toSave(@RequestBody Trade trade, HttpServletResponse response) {
+		Trade tradeSaved = tradeRepository.save(trade);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
-				.buildAndExpand(clientTradeDebitSaved.getId()).toUri();
+				.buildAndExpand(tradeSaved.getId()).toUri();
 
 		response.setHeader("Location", uri.toASCIIString());
 	}

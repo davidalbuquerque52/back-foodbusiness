@@ -20,7 +20,7 @@ import com.syst.trades.repository.ClientTradeDebitRepository;
 
 @RestController
 @RequestMapping("/client-trade-debit")
-public class ClientTradeDebitResource {
+public class ClientTradeDebitController {
 
 
 	@Autowired

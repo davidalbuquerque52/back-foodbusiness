@@ -15,28 +15,28 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.syst.trades.model.PaymentMode;
-import com.syst.trades.repository.PaymentModeRepository;
+import com.syst.trades.model.Status;
+import com.syst.trades.repository.StatusRepository;
 
 @RestController
-@RequestMapping("/payment-mode")
-public class PaymentModeResource {
+@RequestMapping("/status")
+public class StatusController {
 
 	@Autowired
-	private PaymentModeRepository paymentModeRepository;
+	private StatusRepository statusRepository;
 
 	@GetMapping
-	public List<PaymentMode> toList() {
-		return paymentModeRepository.findAll();
+	public List<Status> toList() {
+		return statusRepository.findAll();
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public void toSave(@RequestBody PaymentMode paymentMode, HttpServletResponse response) {
-		PaymentMode paymentModeSaved = paymentModeRepository.save(paymentMode);
+	public void toSave(@RequestBody Status status, HttpServletResponse response) {
+		Status statusSaved = statusRepository.save(status);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
-				.buildAndExpand(paymentModeSaved.getId()).toUri();
+				.buildAndExpand(statusSaved.getId()).toUri();
 
 		response.setHeader("Location", uri.toASCIIString());
 	}

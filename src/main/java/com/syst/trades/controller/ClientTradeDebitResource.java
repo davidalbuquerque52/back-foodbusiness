@@ -1,4 +1,4 @@
-package com.syst.trades.resource;
+package com.syst.trades.controller;
 
 import java.net.URI;
 import java.util.List;
@@ -15,30 +15,30 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.syst.trades.model.ProductSale;
-import com.syst.trades.repository.ProductSaleRepository;
+import com.syst.trades.model.ClientTradeDebit;
+import com.syst.trades.repository.ClientTradeDebitRepository;
 
 @RestController
-@RequestMapping("/product-sale")
-public class ProductSaleResource {
+@RequestMapping("/client-trade-debit")
+public class ClientTradeDebitResource {
+
 
 	@Autowired
-	private ProductSaleRepository productSaleRepository;
+	private ClientTradeDebitRepository clientTradeDebitRepository;
 
 	@GetMapping
-	public List<ProductSale> toList() {
-		return productSaleRepository.findAll();
+	public List<ClientTradeDebit> toList() {
+		return clientTradeDebitRepository.findAll();
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public void toSave(@RequestBody ProductSale productSale, HttpServletResponse response) {
-		ProductSale productSaleSaved = productSaleRepository.save(productSale);
+	public void toSave(@RequestBody ClientTradeDebit clientTradeDebit, HttpServletResponse response) {
+		ClientTradeDebit clientTradeDebitSaved = clientTradeDebitRepository.save(clientTradeDebit);
 
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
-				.buildAndExpand(productSaleSaved.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(clientTradeDebitSaved.getId()).toUri();
 
 		response.setHeader("Location", uri.toASCIIString());
 	}
-
 }

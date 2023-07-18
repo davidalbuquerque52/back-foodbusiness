@@ -1,4 +1,4 @@
-package com.syst.trades.resource;
+package com.syst.trades.controller;
 
 import java.net.URI;
 import java.util.List;
@@ -15,30 +15,30 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.syst.trades.model.ClientTradeDebit;
-import com.syst.trades.repository.ClientTradeDebitRepository;
+import com.syst.trades.model.PaymentMode;
+import com.syst.trades.repository.PaymentModeRepository;
 
 @RestController
-@RequestMapping("/client-trade-debit")
-public class ClientTradeDebitResource {
-
+@RequestMapping("/payment-mode")
+public class PaymentModeResource {
 
 	@Autowired
-	private ClientTradeDebitRepository clientTradeDebitRepository;
+	private PaymentModeRepository paymentModeRepository;
 
 	@GetMapping
-	public List<ClientTradeDebit> toList() {
-		return clientTradeDebitRepository.findAll();
+	public List<PaymentMode> toList() {
+		return paymentModeRepository.findAll();
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public void toSave(@RequestBody ClientTradeDebit clientTradeDebit, HttpServletResponse response) {
-		ClientTradeDebit clientTradeDebitSaved = clientTradeDebitRepository.save(clientTradeDebit);
+	public void toSave(@RequestBody PaymentMode paymentMode, HttpServletResponse response) {
+		PaymentMode paymentModeSaved = paymentModeRepository.save(paymentMode);
 
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-				.buildAndExpand(clientTradeDebitSaved.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
+				.buildAndExpand(paymentModeSaved.getId()).toUri();
 
 		response.setHeader("Location", uri.toASCIIString());
 	}
+
 }

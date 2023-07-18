@@ -1,4 +1,4 @@
-package com.syst.trades.resource;
+package com.syst.trades.controller;
 
 import java.util.Date;
 import java.util.List;

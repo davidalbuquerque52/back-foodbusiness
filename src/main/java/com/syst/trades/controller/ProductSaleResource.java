@@ -1,4 +1,4 @@
-package com.syst.trades.resource;
+package com.syst.trades.controller;
 
 import java.net.URI;
 import java.util.List;
@@ -15,28 +15,28 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.syst.trades.model.PaymentMode;
-import com.syst.trades.repository.PaymentModeRepository;
+import com.syst.trades.model.ProductSale;
+import com.syst.trades.repository.ProductSaleRepository;
 
 @RestController
-@RequestMapping("/payment-mode")
-public class PaymentModeResource {
+@RequestMapping("/product-sale")
+public class ProductSaleResource {
 
 	@Autowired
-	private PaymentModeRepository paymentModeRepository;
+	private ProductSaleRepository productSaleRepository;
 
 	@GetMapping
-	public List<PaymentMode> toList() {
-		return paymentModeRepository.findAll();
+	public List<ProductSale> toList() {
+		return productSaleRepository.findAll();
 	}
 
 	@PostMapping
 	@ResponseStatus(HttpStatus.CREATED)
-	public void toSave(@RequestBody PaymentMode paymentMode, HttpServletResponse response) {
-		PaymentMode paymentModeSaved = paymentModeRepository.save(paymentMode);
+	public void toSave(@RequestBody ProductSale productSale, HttpServletResponse response) {
+		ProductSale productSaleSaved = productSaleRepository.save(productSale);
 
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
-				.buildAndExpand(paymentModeSaved.getId()).toUri();
+				.buildAndExpand(productSaleSaved.getId()).toUri();
 
 		response.setHeader("Location", uri.toASCIIString());
 	}

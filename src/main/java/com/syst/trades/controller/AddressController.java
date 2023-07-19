@@ -1,13 +1,17 @@
 package com.syst.trades.controller;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
+import com.syst.trades.dto.get.AddressResponse;
+import com.syst.trades.dto.post.AddressCreate;
+import com.syst.trades.service.AddressService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -19,43 +23,41 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.syst.trades.event.CreatedResourceEvent;
-import com.syst.trades.model.Address;
-import com.syst.trades.repository.AddressRepository;
 
 @RestController
 @RequestMapping("/address")
 public class AddressController {
 
 	@Autowired
-	private AddressRepository addressRepository;
-
-	@Autowired
 	private ApplicationEventPublisher publisher;
 
+	@Autowired
+	private AddressService service;
+
 	@GetMapping
-	public List<Address> toList() {
-		return addressRepository.findAll();
+	public ResponseEntity<List<AddressResponse>> toList() {
+		List<AddressResponse> addresses = Optional.ofNullable(service.getAllAddresses())
+				.orElseThrow(() -> new EmptyResultDataAccessException(1));
+		return ResponseEntity.ok(addresses);
 	}
 
 	@PostMapping
-	public ResponseEntity<Address> save(@Valid @RequestBody Address address, HttpServletResponse response) {
-
-		address.setCreationDate(new Date());
-		Address addressSaved = addressRepository.save(address);
+	public ResponseEntity<AddressResponse> save(@Valid @RequestBody AddressCreate addressCreate, HttpServletResponse response) {
+		AddressResponse addressSaved = service.save(addressCreate);
 		publisher.publishEvent(new CreatedResourceEvent(this, addressSaved.getId(), response));
 		return ResponseEntity.status(HttpStatus.CREATED).body(addressSaved);
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Address> addressById(@PathVariable Long id) {
-		Address address = addressRepository.findOne(id);
-		return address != null ? ResponseEntity.ok(address) : ResponseEntity.notFound().build();
-
+	public ResponseEntity<AddressResponse> addressById(@PathVariable Long id) {
+		AddressResponse addressResponse = Optional.ofNullable(service.getById(id))
+				.orElseThrow(() -> new EmptyResultDataAccessException(1));
+		return ResponseEntity.ok(addressResponse);
 	}
 
 	@DeleteMapping("/{id}")
 	public void remove(@PathVariable Long id) {
-		addressRepository.delete(id);
+		service.removeById(id);
 	}
 
 }

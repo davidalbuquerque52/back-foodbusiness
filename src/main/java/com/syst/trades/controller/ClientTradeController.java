@@ -1,44 +1,63 @@
 package com.syst.trades.controller;
 
-import java.net.URI;
 import java.util.List;
+import java.util.Optional;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
+import com.syst.trades.dto.get.ClientTradeResponse;
+import com.syst.trades.dto.post.ClientTradeCreate;
+import com.syst.trades.service.ClientTradeService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.syst.trades.model.ClientTradeDebit;
-import com.syst.trades.repository.ClientTradeDebitRepository;
+import com.syst.trades.event.CreatedResourceEvent;
 
 @RestController
-@RequestMapping("/client-trade")
+@RequestMapping("/clientTrade")
 public class ClientTradeController {
 
 	@Autowired
-	private ClientTradeDebitRepository clientTradeDebitRepository;
+	private ApplicationEventPublisher publisher;
+
+	@Autowired
+	private ClientTradeService service;
 
 	@GetMapping
-	public List<ClientTradeDebit> toList() {
-		return clientTradeDebitRepository.findAll();
+	public ResponseEntity<List<ClientTradeResponse>> toList() {
+		List<ClientTradeResponse> clientTradees = Optional.ofNullable(service.getAllClientTrades())
+				.orElseThrow(() -> new EmptyResultDataAccessException(1));
+		return ResponseEntity.ok(clientTradees);
 	}
 
 	@PostMapping
-	@ResponseStatus(HttpStatus.CREATED)
-	public void toSave(@RequestBody ClientTradeDebit clientTradeDebit, HttpServletResponse response) {
-		ClientTradeDebit clientTradeDebitSaved = clientTradeDebitRepository.save(clientTradeDebit);
+	public ResponseEntity<ClientTradeResponse> save(@Valid @RequestBody ClientTradeCreate clientTradeCreate, HttpServletResponse response) {
+		ClientTradeResponse clientTradeSaved = service.save(clientTradeCreate);
+		publisher.publishEvent(new CreatedResourceEvent(this, clientTradeSaved.getId(), response));
+		return ResponseEntity.status(HttpStatus.CREATED).body(clientTradeSaved);
+	}
 
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequestUri().path("/{id}")
-				.buildAndExpand(clientTradeDebitSaved.getId()).toUri();
+	@GetMapping("/{id}")
+	public ResponseEntity<ClientTradeResponse> clientTradeById(@PathVariable Long id) {
+		ClientTradeResponse clientTradeResponse = Optional.ofNullable(service.getById(id))
+				.orElseThrow(() -> new EmptyResultDataAccessException(1));
+		return ResponseEntity.ok(clientTradeResponse);
+	}
 
-		response.setHeader("Location", uri.toASCIIString());
+	@DeleteMapping("/{id}")
+	public void remove(@PathVariable Long id) {
+		service.removeById(id);
 	}
 
 }
